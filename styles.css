@@ -1,0 +1,32 @@
+* {
+	font-family: Verdana, Geneva, sans-serif;
+
+}
+
+header {
+	text-align:  center;
+	border: 1px solid #25C475;
+	border-radius: 5px;
+	margin: 5px 100px 10px 100px;
+	background-color: #25C475;
+	color: white;
+}
+
+main {
+	text-align:  center;
+	border: 3px solid rgb(37, 196, 117);
+	border-radius: 5px;
+	margin: 10px 100px 10px 100px;
+	height: 500px;
+	color: #808080;
+}
+
+footer {
+	text-align:  center;
+	border: 1px solid rgb(37, 196, 117);
+	border-radius: 5px;
+	margin: 10px 100px 5px 100px;
+	background-color: rgb(37, 196, 117);
+	color: white;
+
+}

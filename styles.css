@@ -21,12 +21,16 @@ main {
 	color: #242526;
 }
 
+#titleForm {
+	float:  left;
+}
+
 #titleForm label {
 	margin-bottom: 5px;
 }
 
 #titleForm input[type='text'] {
-	border-radius:  5px;
+	border-width: 1px;
 	border-color: #242526;
 	height: 30px;
 	width: 200px;
@@ -35,21 +39,30 @@ main {
 	background-repeat: no-repeat;
 	transition:  width 0.4s ease-in-out;
 	padding: 5px 2px 5px 25px;
+	margin-right: -1px;
 }
 
 #titleForm input[type='text']:focus {
-	width: 400px;
+	outline: none;
 }
 
-.btn {
-	display:  block;
-	margin-left: 150px;
-	margin-top: 10px;
-	border-radius: 5px;
-	border-color: #242526;
-	background: rgb(37, 196, 117);
-	padding: 5px 15px 5px 15px;
+#titleForm button {
+	margin-left: -5.5px;
+	height: 30px;
+	width: 75px;
+}
 
+#titleForm button:hover {
+	background-color: #ccc;
+	border-width: 1px;
+	width: 75px;
+}
+
+div.msg {
+	color: red;
+	margin-left: 150px;
+	font-style: italic;
+	font-size: 12px;
 }
 
 footer {

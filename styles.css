@@ -1,6 +1,6 @@
 * {
 	font-family: Verdana, Geneva, sans-serif;
-
+	box-sizing: border-box;
 }
 
 header {
@@ -13,12 +13,43 @@ header {
 }
 
 main {
-	text-align:  center;
+	padding: 10px 10px 10px 10px;
 	border: 3px solid rgb(37, 196, 117);
 	border-radius: 5px;
 	margin: 10px 100px 10px 100px;
 	height: 500px;
-	color: #808080;
+	color: #242526;
+}
+
+#titleForm label {
+	margin-bottom: 5px;
+}
+
+#titleForm input[type='text'] {
+	border-radius:  5px;
+	border-color: #242526;
+	height: 30px;
+	width: 200px;
+	background-image:  url('searchicon.png');
+	background-position: 5px 6px;
+	background-repeat: no-repeat;
+	transition:  width 0.4s ease-in-out;
+	padding: 5px 2px 5px 25px;
+}
+
+#titleForm input[type='text']:focus {
+	width: 400px;
+}
+
+.btn {
+	display:  block;
+	margin-left: 150px;
+	margin-top: 10px;
+	border-radius: 5px;
+	border-color: #242526;
+	background: rgb(37, 196, 117);
+	padding: 5px 15px 5px 15px;
+
 }
 
 footer {

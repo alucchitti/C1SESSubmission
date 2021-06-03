@@ -15,11 +15,19 @@
     <h1>Movie Database Search</h1>
 	</header>
   <main>
-    <label for="mname">Enter Movie Title:</label>
-    <input type="text" id="mname" name="mname"><br><br>
+    <form id="titleForm">
+      <div>
+        <label for="movieTitle">Enter Movie Title:</label>
+        <input type="text" id="movieTitle" placeholder="Search...">
+      </div>
+      <input class="btn" type="submit" value="Submit">
+      <div class="msg"></div>
+    </form>
   </main>
   <footer>
     <p>Anthony Lucchitti</p>
   </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>

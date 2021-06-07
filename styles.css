@@ -95,6 +95,27 @@ div.results img {
 	font-size: 14px;
 }
 
+div.buttons {
+	text-align: center;
+	margin-top: 35px;
+	margin-bottom: 15px;
+}
+
+#prev, #next {
+	margin: 15px 15px 15px 15px;
+	width: 100px;
+	height: 25px;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+#prev:hover, #next:hover {
+	color: white;
+	background-color: #25C475;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
 footer {
 	width: 100%;
 	height:  30px;

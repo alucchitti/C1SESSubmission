@@ -51,7 +51,7 @@ function fetchMovies(titleInput, page) {
 	window.pageNum = page;
 	// Need to handle spaces
 	movieTitle = titleInput.replace(/ /g, '%20');
-	const url = `http://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=3d206f64`;
+	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=3d206f64`;
 	fetch(url)
 		.then(response => response.json())
 		.then(data => outputData(data));

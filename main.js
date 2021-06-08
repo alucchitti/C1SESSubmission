@@ -97,17 +97,22 @@ function displayMovies(data) {
 }
 
 function outputMovieDetails(data) {
+	// Extract necessary data and handle missing data
 	var poster = data.Poster; if (poster == "N/A" || poster == "undefined") poster = "https://www.joblo.com/assets/images/joblo/database-specific-img-225x333.jpg";
+	var title = data.Title; if (title == "N/A" || title == "undefined") title = "---";
+	var release = data.Released; if (release == "N/A" || release == "undefined") release = "---";
+	var runtime = data.Runtime; if (runtime == "N/A" || runtime == "undefined") runtime = "---";
+	var genre = data.Genre; if (genre == "N/A" || genre == "undefined") genre = "---";
+	var director = data.Director; if (director == "N/A" || director == "undefined") director = "---";
 	var img = document.createElement("img");
 	img.src = poster;
 	resultsDiv.appendChild(img);
-	var title = data.Title;
 	var titleElement = document.createElement("P");
 	titleElement.innerText = `${title}\n`;
 	titleElement.id = "title";
 	resultsDiv.appendChild(titleElement);
 	var info = document.createElement("P");
-	info.innerText = `• Released: ${data.Released}\n• Runtime: ${data.Runtime}\n• Genre: ${data.Genre}\n• Director: ${data.Director}`;
+	info.innerText = `• Released: ${release}\n• Runtime: ${runtime}\n• Genre: ${genre}\n• Director: ${director}`;
 	info.id = "info";
 	resultsDiv.appendChild(info);
 }

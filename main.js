@@ -5,7 +5,7 @@ const msg = document.querySelector(".msg");
 const resultsDiv = document.querySelector(".results");
 const buttonsDiv = document.querySelector(".buttons");
 // Declare global variable for current page displaying
-window.pageNum = 0;
+var pageNum = 0;
 // Add Buttons
 addButtons();
 updateButtons();
@@ -32,25 +32,27 @@ function onSubmit(e) {
 	} else {
 		// Fetch movies from api
 		fetchMovies(titleInput.value, 1);
+		titleInputSAVED = titleInput.value;
+		document.getElementById('movieTitle').value='';
 	}
 }
 
 function onPrevClick(e) {
 	e.preventDefault();
 	resultsDiv.innerHTML = '';
-	fetchMovies(titleInput.value, pageNum-1);
+	fetchMovies(titleInputSAVED, pageNum-1);
 }
 
 function onNextClick(e) {
 	e.preventDefault();
 	resultsDiv.innerHTML = '';
-	fetchMovies(titleInput.value, pageNum+1);
+	fetchMovies(titleInputSAVED, pageNum+1);
 }
 
-function fetchMovies(titleInput, page) {
+function fetchMovies(titleInputSAVED, page) {
 	window.pageNum = page;
 	// Need to handle spaces
-	movieTitle = titleInput.replace(/ /g, '%20');
+	movieTitle = titleInputSAVED.replace(/ /g, '%20');
 	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=3d206f64`;
 	fetch(url)
 		.then(response => response.json())
@@ -66,6 +68,16 @@ function outputData(data) {
 		updateButtons();
 	} else {
 		window.totalResults = parseInt(data.totalResults);
+		// Display message
+		var resultsMsg = document.createElement("P");
+		if (totalResults == 1) resultsMsg.innerText = `1 result found for "${titleInputSAVED}"`; // Check for singular 'result'
+		else resultsMsg.innerText = `${totalResults} results found for "${titleInputSAVED}"`; // Otherwise plural 'results'
+		resultsMsg.id = "resultsMsg";
+		resultsDiv.appendChild(resultsMsg);
+		var pageMsg = document.createElement("P");
+		pageMsg.innerText = `page ${pageNum}`;
+		pageMsg.id = "pageMsg";
+		resultsDiv.appendChild(pageMsg);
 		//Display movies
 		displayMovies(data.Search);
 		updateButtons();
@@ -77,25 +89,29 @@ function outputData(data) {
 
 function displayMovies(data) {
 	for(i = 0; i < data.length; i++) {
-		var title = data[i].Title;
-	    var release = data[i].Year; if (typeof release === "undefined") release = "———";
-	    var runtime = data[i].Runtime; if (typeof runtime === "undefined") runtime = "———";
-	    var genre = data[i].Genre; if (typeof genre === "undefined") genre = "———";
-	    var director = data[i].Director; if (typeof director === "undefined") director = "———";
-	    var poster = data[i].Poster; if (poster == "N/A" || typeof poster === "undefined") poster = "https://www.joblo.com/assets/images/joblo/database-specific-img-225x333.jpg";
-		var img = document.createElement("img");
-		img.src = poster;
-		resultsDiv.appendChild(img);
-		var titleElement = document.createElement("P");
-		titleElement.innerText = `${title}\n`;
-		titleElement.id = "title";
-		resultsDiv.appendChild(titleElement);
-		var info = document.createElement("P");
-		info.innerText = `• Released: ${release}\n• Runtime: ${runtime}\n• Genre: ${genre}\n• Director: ${director}`;
-		info.id = "info";
-		resultsDiv.appendChild(info);
+		// Get movie details from api
+		fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=3d206f64`)
+			.then(response => response.json())
+			.then(data => outputMovieDetails(data));
 	}
 }
+
+function outputMovieDetails(data) {
+	var poster = data.Poster; if (poster == "N/A" || poster == "undefined") poster = "https://www.joblo.com/assets/images/joblo/database-specific-img-225x333.jpg";
+	var img = document.createElement("img");
+	img.src = poster;
+	resultsDiv.appendChild(img);
+	var title = data.Title;
+	var titleElement = document.createElement("P");
+	titleElement.innerText = `${title}\n`;
+	titleElement.id = "title";
+	resultsDiv.appendChild(titleElement);
+	var info = document.createElement("P");
+	info.innerText = `• Released: ${data.Released}\n• Runtime: ${data.Runtime}\n• Genre: ${data.Genre}\n• Director: ${data.Director}`;
+	info.id = "info";
+	resultsDiv.appendChild(info);
+}
+
 
 function addButtons() {
 	var prevBtn = document.createElement("BUTTON");   // Create a <button> element
@@ -109,7 +125,7 @@ function addButtons() {
 }
 
 function updateButtons() {
-	if (window.pageNum == 0) {
+	if (window.pageNum == 0 || totalResults < 10) {
 		document.getElementById("prev").style.visibility = 'hidden';
 		document.getElementById("next").style.visibility = 'hidden';
 	} else if (window.pageNum == 1) {
@@ -123,5 +139,4 @@ function updateButtons() {
 		document.getElementById("prev").style.visibility = 'visible';
 		document.getElementById("next").style.visibility = 'visible';
 	}
-
 }

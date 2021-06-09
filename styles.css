@@ -16,10 +16,12 @@ header {
 }
 
 main {
-	position: absolute;
-	height: 75%;
+	position: fixed;
+	top: 14%;
+	right: 5%;
+	bottom: 8%;
+	left: 5%;
 	width: 90%;
-	margin: 6.5% 5% 0% 5%;
 	padding: 10px 10px 10px 10px;
 	border: 1.5px solid gray;
 	border-radius: 5px;

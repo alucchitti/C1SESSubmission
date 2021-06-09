@@ -26,6 +26,8 @@ function onSubmit(e) {
 	if(titleInput.value == '') {
 		msg.classList.add('error');
 		msg.innerHTML = 'Please enter movie title';
+		pageNum = 0;
+		updateButtons();
 
 		// Remove error after 3 seconds
 		setTimeout(() => msg.remove(), 3000)

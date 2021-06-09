@@ -21,7 +21,6 @@ main {
 	right: 5%;
 	bottom: 8%;
 	left: 5%;
-	width: 90%;
 	padding: 10px 10px 10px 10px;
 	border: 1.5px solid gray;
 	border-radius: 5px;
@@ -144,3 +143,9 @@ footer {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 600px) {
+  header {
+    height: 7%;
+    margin-bottom: 5%;
+  }
+}

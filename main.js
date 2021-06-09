@@ -77,7 +77,7 @@ function outputData(data) {
 		resultsMsg.id = "resultsMsg";
 		resultsDiv.appendChild(resultsMsg);
 		var pageMsg = document.createElement("P");
-		pageMsg.innerText = `page ${pageNum}`;
+		pageMsg.innerText = `page ${pageNum} of ${Math.ceil(totalResults/10)}`;
 		pageMsg.id = "pageMsg";
 		resultsDiv.appendChild(pageMsg);
 		//Display movies

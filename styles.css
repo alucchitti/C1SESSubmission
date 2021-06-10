@@ -9,7 +9,7 @@ header {
   top: 0;
   width: 100%;
   height: 13%;
-  background-color: #25C475;
+  background-color: #038a25;
   color: white;
   text-align: center;
   overflow: hidden;
@@ -102,7 +102,7 @@ div.card {
 }
 
 div.results img {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   	width: 200px;
   	height: auto;
   	margin-top: 15px;
@@ -138,7 +138,7 @@ div.buttons {
 
 #prev:hover, #next:hover {
 	color: white;
-	background-color: #25C475;
+	background-color: #038a25;
 	border: 1px solid gray;
 	border-radius: 5px;
 }
@@ -160,7 +160,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 7%;
-  background-color: #25C475;
+  background-color: #038a25;
   color: white;
   text-align: center;
   overflow: hidden;
@@ -170,5 +170,15 @@ footer {
   header {
     height: 7%;
     margin-bottom: 5%;
+  }
+
+  div.containerL {
+  	float: none;
+  	display: inline-block;
+  }
+
+  div.containerR {
+  	float: none;
+  	display: inline-block;
   }
 }

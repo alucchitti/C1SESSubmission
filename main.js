@@ -58,13 +58,14 @@ function fetchMovies(titleInputSAVED, page) {
 	window.pageNum = page;
 	// Need to handle spaces
 	movieTitle = titleInputSAVED.replace(/ /g, '%20');
-	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=3d206f64`;
+	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=888a118d`;
 	fetch(url)
 		.then(response => response.json())
 		.then(data => outputData(data));
 }
 
 function outputData(data) {
+	console.log(data);
 	// Check if there were no responses found
 	if(data.Response == "False"){
 		resultsDiv.classList.add('error');
@@ -101,7 +102,7 @@ function outputData(data) {
 function displayMovies(data) {
 	for(i = 0; i < data.length; i++) {
 		// Get movie details from api
-		fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=3d206f64`)
+		fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=888a118d`)
 			.then(response => response.json())
 			.then(data => outputMovieDetails(data));
 	}

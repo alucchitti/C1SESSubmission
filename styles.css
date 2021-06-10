@@ -79,13 +79,13 @@ div.results {
 }
 
 div.containerL {
+	width: 50%;
 	float: left;
-	margin-left: 15px;
 }
 
 div.containerR {
+	width: 50%;
 	float: right;
-	margin-right: 15px;
 }
 
 div.containerC {
@@ -93,10 +93,13 @@ div.containerC {
 }
 
 .containerC .card {
+	display: block;
 	margin:  0 auto;
 }
 
 div.card {
+	margin-left: auto;
+	margin-right: auto;
 	height: 500px;
 	width: 500px;
 }
@@ -162,23 +165,36 @@ footer {
   height: 7%;
   background-color: #038a25;
   color: white;
-  text-align: center;
   overflow: hidden;
 }
 
-@media only screen and (max-width: 600px) {
+footer p {
+	float: left;
+	margin-left: 15px;
+	margin-top: 10px;
+}
+
+footer img {
+	filter: brightness(0) invert(1);
+	float: right;
+	margin-right: 15px;
+	margin-top: 10px;
+}
+
+footer img:hover {
+	filter: brightness(1) invert(0);
+}
+
+@media only screen and (max-width: 1000px) {
   header {
     height: 7%;
     margin-bottom: 5%;
   }
 
-  div.containerL {
+  div.containerL, div.containerR {
   	float: none;
   	display: inline-block;
+  	width: 100%;
   }
 
-  div.containerR {
-  	float: none;
-  	display: inline-block;
-  }
 }

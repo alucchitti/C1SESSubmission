@@ -78,6 +78,29 @@ div.results {
 	padding-top: 10px;
 }
 
+div.containerL {
+	float: left;
+	margin-left: 15px;
+}
+
+div.containerR {
+	float: right;
+	margin-right: 15px;
+}
+
+div.containerC {
+	display: inline-block;
+}
+
+.containerC .card {
+	margin:  0 auto;
+}
+
+div.card {
+	height: 500px;
+	width: 500px;
+}
+
 div.results img {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   	width: 200px;

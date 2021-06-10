@@ -4,8 +4,10 @@ const titleInput = document.querySelector("#movieTitle");
 const msg = document.querySelector(".msg");
 const resultsDiv = document.querySelector(".results");
 const buttonsDiv = document.querySelector(".buttons");
+// Variables for movie cards
+var containerL; var containerR; var containerC;
 // Declare global variable for current page displaying
-var pageNum = 0;
+var pageNum = 0; var currMovieCard = 0;
 // Add Buttons
 addButtons();
 updateButtons();
@@ -32,6 +34,7 @@ function onSubmit(e) {
 		// Remove error after 3 seconds
 		setTimeout(() => msg.remove(), 3000)
 	} else {
+		currMovieCard = 0;
 		// Fetch movies from api
 		fetchMovies(titleInput.value, 1);
 		titleInputSAVED = titleInput.value;
@@ -80,6 +83,12 @@ function outputData(data) {
 		pageMsg.innerText = `page ${pageNum} of ${Math.ceil(totalResults/10)}`;
 		pageMsg.id = "pageMsg";
 		resultsDiv.appendChild(pageMsg);
+		containerL = document.createElement("DIV"); containerL.className = "containerL";
+		resultsDiv.appendChild(containerL);
+		containerR = document.createElement("DIV"); containerR.className = "containerR";
+		resultsDiv.appendChild(containerR);
+		containerC = document.createElement("DIV"); containerC.className = "containerC";
+		resultsDiv.appendChild(containerC);
 		//Display movies
 		displayMovies(data.Search);
 		updateButtons();
@@ -99,6 +108,13 @@ function displayMovies(data) {
 }
 
 function outputMovieDetails(data) {
+	if (currMovieCard%2 == 0 && currMovieCard == (totalResults-1)) // Add to center
+		container = document.querySelector(".containerC");
+	else if (currMovieCard%2 == 0) // Even so add to left side
+		container = document.querySelector(".containerL");
+	else // Odd to add to right side
+		container = document.querySelector(".containerR");
+
 	// Extract necessary data and handle missing data
 	var poster = data.Poster; if (poster == "N/A" || poster == "undefined") poster = "https://www.joblo.com/assets/images/joblo/database-specific-img-225x333.jpg";
 	var title = data.Title; if (title == "N/A" || title == "undefined") title = "---";
@@ -106,17 +122,26 @@ function outputMovieDetails(data) {
 	var runtime = data.Runtime; if (runtime == "N/A" || runtime == "undefined") runtime = "---";
 	var genre = data.Genre; if (genre == "N/A" || genre == "undefined") genre = "---";
 	var director = data.Director; if (director == "N/A" || director == "undefined") director = "---";
+
+	// Create div to house movie card
+	var card = document.createElement("DIV");
+	card.className  = "card";
+	container.appendChild(card);
+	// Create necessary elements for image, title, & details
 	var img = document.createElement("img");
 	img.src = poster;
-	resultsDiv.appendChild(img);
+	card.appendChild(img);
 	var titleElement = document.createElement("P");
 	titleElement.innerText = `${title}\n`;
 	titleElement.id = "title";
-	resultsDiv.appendChild(titleElement);
+	card.appendChild(titleElement);
 	var info = document.createElement("P");
 	info.innerText = `• Released: ${release}\n• Runtime: ${runtime}\n• Genre: ${genre}\n• Director: ${director}`;
 	info.id = "info";
-	resultsDiv.appendChild(info);
+	card.appendChild(info);
+
+	// Increment movie card number
+	currMovieCard++;
 }
 
 

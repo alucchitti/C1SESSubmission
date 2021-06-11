@@ -76,7 +76,8 @@ main {
 /* Error message if input is blank */
 div.msg { 
 	color: red;
-	margin-left: 150px;
+	margin-top: 3px;
+	margin-left: 30px;
 	font-style: italic;
 	font-size: 12px;
 }

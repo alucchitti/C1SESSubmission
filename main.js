@@ -16,6 +16,7 @@ const nextBtn = document.querySelector("#next");
 
 // Listener for form submit
 titleForm.addEventListener('submit', onSubmit);
+// Listener for prev/next submit
 prevBtn.addEventListener('click', onPrevClick);
 nextBtn.addEventListener('click', onNextClick);
 
@@ -25,7 +26,7 @@ function onSubmit(e) {
 	e.preventDefault();
 	resultsDiv.innerHTML = '';
 
-	if(titleInput.value == '') {
+	if(titleInput.value == '') { // Display error message
 		msg.classList.add('error');
 		msg.innerHTML = 'Please enter movie title';
 		pageNum = 0;
@@ -37,7 +38,7 @@ function onSubmit(e) {
 		currMovieCard = 0;
 		// Fetch movies from api
 		fetchMovies(titleInput.value, 1);
-		titleInputSAVED = titleInput.value;
+		titleInputSAVED = titleInput.value; // Save search entry 
 		document.getElementById('movieTitle').value='';
 	}
 }
@@ -58,21 +59,20 @@ function fetchMovies(titleInputSAVED, page) {
 	window.pageNum = page;
 	// Need to handle spaces
 	movieTitle = titleInputSAVED.replace(/ /g, '%20');
-	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=888a118d`;
+	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=3d206f64`;
 	fetch(url)
 		.then(response => response.json())
 		.then(data => outputData(data));
 }
 
 function outputData(data) {
-	console.log(data);
 	// Check if there were no responses found
 	if(data.Response == "False"){
 		resultsDiv.classList.add('error');
 		resultsDiv.innerHTML = "Sorry! No results found.";
 		window.pageNum = 0;
 		updateButtons();
-	} else {
+	} else { 
 		window.totalResults = parseInt(data.totalResults);
 		// Display message
 		var resultsMsg = document.createElement("P");
@@ -84,6 +84,7 @@ function outputData(data) {
 		pageMsg.innerText = `page ${pageNum} of ${Math.ceil(totalResults/10)}`;
 		pageMsg.id = "pageMsg";
 		resultsDiv.appendChild(pageMsg);
+		// Create containers for movie cards
 		containerL = document.createElement("DIV"); containerL.className = "containerL";
 		resultsDiv.appendChild(containerL);
 		containerR = document.createElement("DIV"); containerR.className = "containerR";
@@ -101,19 +102,19 @@ function outputData(data) {
 
 function displayMovies(data) {
 	for(i = 0; i < data.length; i++) {
-		// Get movie details from api
-		fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=888a118d`)
+		// Get movie details from api using imdb ID
+		fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=3d206f64`)
 			.then(response => response.json())
 			.then(data => outputMovieDetails(data));
 	}
 }
 
 function outputMovieDetails(data) {
-	if (currMovieCard%2 == 0 && currMovieCard == (totalResults-1)) // Add to center
+	if (currMovieCard%2 == 0 && currMovieCard == (totalResults-1)) // Add to center container
 		container = document.querySelector(".containerC");
-	else if (currMovieCard%2 == 0) // Even so add to left side
+	else if (currMovieCard%2 == 0) // Even so add to left side container
 		container = document.querySelector(".containerL");
-	else // Odd to add to right side
+	else // Odd so add to right side container
 		container = document.querySelector(".containerR");
 
 	// Extract necessary data and handle missing data
@@ -158,17 +159,16 @@ function addButtons() {
 }
 
 function updateButtons() {
-	if (window.pageNum == 0 || totalResults < 10) {
+	if (window.pageNum == 0 || totalResults < 10) { // No buttons becuase all results can fit on one page
 		document.getElementById("prev").style.visibility = 'hidden';
 		document.getElementById("next").style.visibility = 'hidden';
-	} else if (window.pageNum == 1) {
+	} else if (window.pageNum == 1) { // Only display next
 		document.getElementById("prev").style.visibility = 'hidden';
 		document.getElementById("next").style.visibility = 'visible';
-
-	} else if (window.pageNum == Math.ceil(totalResults/10)) {
+	} else if (window.pageNum == Math.ceil(totalResults/10)) { // Only display prev
 		document.getElementById("prev").style.visibility = 'visible';
 		document.getElementById("next").style.visibility = 'hidden';
-	} else {
+	} else { // Display both next and prev
 		document.getElementById("prev").style.visibility = 'visible';
 		document.getElementById("next").style.visibility = 'visible';
 	}

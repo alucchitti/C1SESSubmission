@@ -1,6 +1,7 @@
 * {
-	font-family: Verdana, Geneva, sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
 	box-sizing: border-box;
+	background-color: #f7f7f7;
 }
 
 header {
@@ -9,10 +10,15 @@ header {
   top: 0;
   width: 100%;
   height: 13%;
-  background-color: #038a25;
+  background-color: #254e58;
   color: white;
   text-align: center;
+  letter-spacing: 3px;
   overflow: hidden;
+}
+
+header h2 {
+	background-color: #254e58;
 }
 
 main {
@@ -29,7 +35,7 @@ main {
 }
 
 #titleForm {
-	float:  left;
+	text-align: center;
 }
 
 #titleForm label {
@@ -56,6 +62,7 @@ main {
 
 #titleForm button {
 	margin-left: -5.5px;
+	border-width: 1px;
 	height: 30px;
 	width: 75px;
 }
@@ -66,7 +73,8 @@ main {
 	width: 75px;
 }
 
-div.msg {
+/* Error message if input is blank */
+div.msg { 
 	color: red;
 	margin-left: 150px;
 	font-style: italic;
@@ -113,15 +121,13 @@ div.results img {
 }
 
 #title {
-	font-family: 'Oswald', sans-serif;
-	font-weight: 1000;
+	font-weight: bolder;
 	font-size: 18px;
-	letter-spacing: 3px;
+	letter-spacing: 1px;
 	margin-bottom: -10px;
 }
 
 #info {
-	font-family: 'Oswald', sans-serif;
 	font-size: 14px;
 }
 
@@ -141,7 +147,7 @@ div.buttons {
 
 #prev:hover, #next:hover {
 	color: white;
-	background-color: #038a25;
+	background-color: #254e58;
 	border: 1px solid gray;
 	border-radius: 5px;
 }
@@ -163,7 +169,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 7%;
-  background-color: #038a25;
+  background-color: #112d32;
   color: white;
   overflow: hidden;
 }
@@ -172,9 +178,11 @@ footer p {
 	float: left;
 	margin-left: 15px;
 	margin-top: 10px;
+	background-color: #112d32;
 }
 
 footer img {
+	background-color: transparent;
 	filter: brightness(0) invert(1);
 	float: right;
 	margin-right: 15px;
@@ -182,7 +190,7 @@ footer img {
 }
 
 footer img:hover {
-	filter: brightness(1) invert(0);
+	filter: brightness(1) invert(0.5);
 }
 
 @media only screen and (max-width: 1000px) {
@@ -190,7 +198,8 @@ footer img:hover {
     height: 7%;
     margin-bottom: 5%;
   }
-
+  
+  /* Display movies in single column */
   div.containerL, div.containerR {
   	float: none;
   	display: inline-block;

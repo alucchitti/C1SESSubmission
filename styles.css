@@ -246,4 +246,20 @@ footer img:hover {
   	width: 100%;
   }
 
+	.card {
+		height: fit-content;
+	}
+
+	.card img {
+	  visibility: visible;
+	  opacity: 1;
+	  margin-top: 20px;
+	}
+
+	.card #info {
+	  visibility: visible;
+	  opacity: 1;
+	  margin-top: 30px;
+	}
+
 }

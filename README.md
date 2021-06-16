@@ -9,4 +9,6 @@ This was my first time exploring front-end development, so this project was a hu
 Built with HTML/CSS and Vanilla JavaScript.
 
 Here is a quick demo:
+
+
 ![alt text](https://github.com/alucchitti/MovieSearch/blob/main/images/demo.gif "Gif Demo")

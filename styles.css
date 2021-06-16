@@ -74,7 +74,7 @@ main {
 }
 
 /* Error message if input is blank */
-div.msg { 
+.msg { 
 	color: red;
 	margin-top: 3px;
 	margin-left: 30px;
@@ -82,43 +82,80 @@ div.msg {
 	font-size: 12px;
 }
 
-div.results {
+.results {
 	text-align: center;
 	padding-top: 10px;
 }
 
-div.containerL {
+.containerL {
 	width: 50%;
 	float: left;
+	text-align: center;
 }
 
-div.containerR {
+.containerR {
 	width: 50%;
 	float: right;
+	text-align: center;
 }
 
-div.containerC {
+.containerC {
 	display: inline-block;
 }
 
 .containerC .card {
 	display: block;
-	margin:  0 auto;
 }
 
-div.card {
+.maincardcontainer {
+	margin: 25px 85px;
+	position: relative;
+	border: 1.0px solid gray;
+	border-radius: 5px;
+}
+
+.card {
 	margin-left: auto;
 	margin-right: auto;
-	height: 500px;
-	width: 500px;
+	height: 50px;
+	width: 350px;
+	position: relative;
+	transition: 0.3s ease-in-out;
 }
 
-div.results img {
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  	width: 200px;
-  	height: auto;
-  	margin-top: 15px;
-  	margin-bottom: -17px;
+.card:hover {
+	height: fit-content;
+}
+
+.results img {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 200px;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: -17px;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.01s ease-in;
+}
+
+#info {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.01s ease-in;
+}
+
+.card:hover img {
+  visibility: visible;
+  opacity: 1;
+  margin-top: 20px;
+}
+
+.card:hover #info {
+  visibility: visible;
+  opacity: 1;
+  margin-top: 30px;
 }
 
 #title {
@@ -130,16 +167,18 @@ div.results img {
 
 #info {
 	font-size: 14px;
+	text-align: left;
+	margin-left: 75px;
 }
 
-div.buttons {
+.buttons {
 	text-align: center;
 	margin-top: 35px;
-	margin-bottom: 15px;
+	margin-bottom: 35px;
 }
 
 #prev, #next {
-	margin: 15px 15px 15px 15px;
+	margin: 15px 15px;
 	width: 100px;
 	height: 25px;
 	border: 1px solid gray;
@@ -170,7 +209,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 7%;
-  background-color: #112d32;
+  background-color: #254e58;
   color: white;
   overflow: hidden;
 }
@@ -179,7 +218,7 @@ footer p {
 	float: left;
 	margin-left: 15px;
 	margin-top: 10px;
-	background-color: #112d32;
+	background-color: #254e58;
 }
 
 footer img {

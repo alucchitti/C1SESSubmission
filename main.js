@@ -125,18 +125,23 @@ function outputMovieDetails(data) {
 	var genre = data.Genre; if (genre == "N/A" || genre == "undefined") genre = "---";
 	var director = data.Director; if (director == "N/A" || director == "undefined") director = "---";
 
+	// Create container div to house all movie contents
+	var maincardcontainer = document.createElement("DIV");
+	maincardcontainer.className = "maincardcontainer";
+	container.appendChild(maincardcontainer);
+	
 	// Create div to house movie card
 	var card = document.createElement("DIV");
 	card.className  = "card";
-	container.appendChild(card);
-	// Create necessary elements for image, title, & details
-	var img = document.createElement("img");
-	img.src = poster;
-	card.appendChild(img);
+	maincardcontainer.appendChild(card);
+	// Create necessary elements for title, image, & details
 	var titleElement = document.createElement("P");
 	titleElement.innerText = `${title}\n`;
 	titleElement.id = "title";
 	card.appendChild(titleElement);
+	var img = document.createElement("img");
+	img.src = poster;
+	card.appendChild(img);
 	var info = document.createElement("P");
 	info.innerText = `• Released: ${release}\n• Runtime: ${runtime}\n• Genre: ${genre}\n• Director: ${director}`;
 	info.id = "info";

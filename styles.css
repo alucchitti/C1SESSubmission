@@ -110,8 +110,11 @@ main {
 .maincardcontainer {
 	margin: 25px 85px;
 	position: relative;
-	border: 1.0px solid gray;
+	border: 1.0px solid #346e7c;
 	border-radius: 5px;
+	/*background-color: #507179;*/
+	background-color: #346e7c;
+	color: white;
 }
 
 .card {
@@ -119,6 +122,7 @@ main {
 	margin-right: auto;
 	height: 50px;
 	width: 350px;
+	background-color: #346e7c;
 	position: relative;
 	transition: 0.3s ease-in-out;
 }
@@ -162,11 +166,13 @@ main {
 	font-weight: bolder;
 	font-size: 18px;
 	letter-spacing: 1px;
+	background-color: #346e7c;
 	margin-bottom: -10px;
 }
 
 #info {
 	font-size: 14px;
+	background-color: #346e7c;
 	text-align: left;
 	margin-left: 75px;
 }
@@ -187,7 +193,7 @@ main {
 
 #prev:hover, #next:hover {
 	color: white;
-	background-color: #254e58;
+	background-color: #346e7c;
 	border: 1px solid gray;
 	border-radius: 5px;
 }

@@ -36,6 +36,8 @@ function onSubmit(e) {
 		setTimeout(() => msg.remove(), 3000)
 	} else {
 		currMovieCard = 0;
+		document.getElementById("prev").style.visibility = 'hidden';
+		document.getElementById("next").style.visibility = 'hidden';
 		// Fetch movies from api
 		fetchMovies(titleInput.value, 1);
 		titleInputSAVED = titleInput.value; // Save search entry 
@@ -45,28 +47,39 @@ function onSubmit(e) {
 
 function onPrevClick(e) {
 	e.preventDefault();
+	window.currMovieCard = window.currMovieCard - 10;
+	if(pageNum == Math.ceil(totalResults/10)) window.currMovieCard = window.currMovieCard - (totalResults%10);
 	resultsDiv.innerHTML = '';
+	document.getElementById("prev").style.visibility = 'hidden';
+	document.getElementById("next").style.visibility = 'hidden';
 	fetchMovies(titleInputSAVED, pageNum-1);
 }
 
 function onNextClick(e) {
 	e.preventDefault();
 	resultsDiv.innerHTML = '';
+	document.getElementById("prev").style.visibility = 'hidden';
+	document.getElementById("next").style.visibility = 'hidden';
 	fetchMovies(titleInputSAVED, pageNum+1);
 }
 
-function fetchMovies(titleInputSAVED, page) {
+async function fetchMovies(titleInputSAVED, page) {
 	window.pageNum = page;
+
+	document.getElementById("prev").style.visibility = 'hidden';
+	document.getElementById("next").style.visibility = 'hidden';
+
 	// Need to handle spaces
 	movieTitle = titleInputSAVED.replace(/ /g, '%20');
 	const url = `https://www.omdbapi.com/?s=${movieTitle}&page=${page}&apikey=3d206f64`;
-	fetch(url)
-		.then(response => response.json())
-		.then(data => outputData(data));
+	let response = await fetch(url);
+	let movies = await response.json();
+	outputData(movies);
+
 }
 
-function outputData(data) {
-	// Check if there were no responses found
+async function outputData(data) {
+	// Check if there are no responses found
 	if(data.Response == "False"){
 		resultsDiv.classList.add('error');
 		resultsDiv.innerHTML = "Sorry! No results found.";
@@ -84,6 +97,10 @@ function outputData(data) {
 		pageMsg.innerText = `page ${pageNum} of ${Math.ceil(totalResults/10)}`;
 		pageMsg.id = "pageMsg";
 		resultsDiv.appendChild(pageMsg);
+		var loadingMsg = document.createElement("P");
+		loadingMsg.innerText = "\n\nLoading results...";
+		loadingMsg.id = "loadingMsg";
+		resultsDiv.appendChild(loadingMsg);
 		// Create containers for movie cards
 		containerL = document.createElement("DIV"); containerL.className = "containerL";
 		resultsDiv.appendChild(containerL);
@@ -93,28 +110,43 @@ function outputData(data) {
 		resultsDiv.appendChild(containerC);
 		//Display movies
 		displayMovies(data.Search);
-		updateButtons();
+		
 	    
 	}
 		
 }
 
 
-function displayMovies(data) {
+async function displayMovies(data) {
+	results = []
 	for(i = 0; i < data.length; i++) {
-		// Get movie details from api using imdb ID
-		fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=3d206f64`)
-			.then(response => response.json())
-			.then(data => outputMovieDetails(data));
+		let response = await fetch(`https://www.omdbapi.com/?i=${data[i].imdbID}&type=movie&apikey=3d206f64`);
+		let movieDetails = await response.json();
+		results.push(movieDetails)
 	}
+
+	// Clear "Loading Results..." message
+	var loadingMsg = document.getElementById("loadingMsg");
+    loadingMsg.parentNode.removeChild(loadingMsg);
+
+
+	for (const result of results) {
+		outputMovieDetails(result);
+	}
+
+	updateButtons();
+
 }
 
 function outputMovieDetails(data) {
-	if (currMovieCard%2 == 0 && currMovieCard == (totalResults-1)) // Add to center container
+	// Incremement movie card counter
+	currMovieCard++;
+
+	if (currMovieCard%2 == 1 && currMovieCard == (totalResults)) // Add to center container
 		container = document.querySelector(".containerC");
-	else if (currMovieCard%2 == 0) // Even so add to left side container
+	else if (currMovieCard%2 == 1) // Odd so add to left side container
 		container = document.querySelector(".containerL");
-	else // Odd so add to right side container
+	else // Even so add to right side container
 		container = document.querySelector(".containerR");
 
 	// Extract necessary data and handle missing data
@@ -147,8 +179,6 @@ function outputMovieDetails(data) {
 	info.id = "info";
 	card.appendChild(info);
 
-	// Increment movie card number
-	currMovieCard++;
 }
 
 
@@ -163,7 +193,7 @@ function addButtons() {
 	buttonsDiv.appendChild(nextBtn);
 }
 
-function updateButtons() {
+async function updateButtons() {
 	if (window.pageNum == 0 || totalResults < 10) { // No buttons becuase all results can fit on one page
 		document.getElementById("prev").style.visibility = 'hidden';
 		document.getElementById("next").style.visibility = 'hidden';

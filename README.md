@@ -1,4 +1,6 @@
-# What's that Movie? - A web app that allows users to find details about movies related to their search.
+# What's that Movie?
+
+### A web app that allows users to find details about movies related to their search.
 
 Link to deployed submission: https://alucchitti.github.io/MovieSearch/
 
